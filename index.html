@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/reset.css">
+    <link rel="stylesheet" href="src/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- ソート用のらいぶらり -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+
+</head>
+<body>
+<div class="top">
+    <h1>僕のプログラミング学習記録</h1>
+</div>
+<div class="timer">
+    <p id="timer">00:00:00</p>
+</div>
+
+<div class="startButtonOuter">
+    <button id="start" class="startButton">START</button>
+</div>
+
+<!-- 開始時のモーダルビュー -->
+<div class="startModal modal" id="startModal">
+    <div id="cancelModal"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
+    <!-- カメラ -->
+        <!-- ビデオストリームを表示するためのvideo要素 -->
+    <div class = "startOuter">
+        <div class="snapBeforeFrame">
+            <video class="snapFrame"id="video" width="600" height="450" autoplay> </video>
+            <img src="/img/snap.png" id="snap" class="snapButton pushButton" alt="">
+        </div>
+
+        <!-- 撮影した写真を表示するためのcanvas要素 -->
+        <div class="snapAfterFrame">
+            <img src="/img/resnap.png" id="resnap" class="resnapButton pushButton" alt="">
+            <canvas class="snapFrame" id="startCanvas" width="600" height="450" ></canvas>
+        </div>
+    </div>
+    <button id="startSubmit" class="startSubmit pushButton">START</button>
+</div>
+
+<!-- 作業中のビュー -->
+<div id = "inProgress" class="inProgress">
+    <div class="startButtonOuter">
+        <button id="finish"class="finishButton pushButton">FINISH</button>
+    </div>
+</div>
+
+<!-- 終了時のモーダルビュー -->
+<div class = "finishModal modal" id="finishModal">
+    <div id="cancelModalFinish"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
+    <div class="finishOuter">
+        <div class = "finishTexts">
+            <select required class="finishText" id="finishOneword" name="finishOneword" aria-placeholder="達成度">
+                <option value="" selected hidden>選択してください</option>
+                <option value="1">限界突破！</option>
+                <option value="2">よく頑張った！</option>
+                <option value="3">ぼちぼちかな</option>
+                <option value="4">妥協した</option>
+            </select>      
+            <input class="finishText"id="finishAchivement" type="text" placeholder="振り返りの一言！"size="30">
+        </div>
+        <button id="finishSubmit" class="finishSubmit">FINISH</button>
+    </div>
+</div>
+
+<div class="display">
+    <table border="1" width="100%"  height="150px" id="records" class="tablesorter">
+        <thead>
+            <th width = 15% >開始日時</th>
+            <th width = 20% >はじめのお顔</th>
+            <th width = 15%>終了日時</th>
+            <th width = 8%>経過時間</th>
+            <th width = 21%>達成度</th>
+            <th width = 21%>振り返り</th>
+        </thead>
+        <tbody>
+            <!-- <td align="center">20201013</td>
+            <td align="center"> <img src="" alt=""></td>
+            <td align="center">20210111</td>
+            <td align="center">5</td>
+            <td align="center">まあまあよくできた</td>
+            <td align="center">これからも頑張ってやっていきたい</td> -->
+        </tbody>
+    </table>
+</div>
+
+<div class="clear">
+    <button id="clear">全て削除</button>
+</div>
+
+    <!-- <ul class="record recordtitle_">
+    <li>開始日時</li>
+    <li>終了日時</li>
+    <li>経過時間</li>
+    <li>今日の達成度</li>
+    <li>次回に向けて</li>
+</ul> -->
+<!-- <div id = "records"></div>
+</div> -->
+<script src="//cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
+
+
+
+<!-- サービスの流れ
+- 開始ボタン終了ボタンとこれまでの記録を表示
+- 開始ボタンでモーダルが現れる
+- モーダルで写真を取る
+- 今日の意気込みを書く
+- 終了ボタンでモーダルが現れる
+
+
+
+
+
+
+
+
+
+
+
+
+-->
