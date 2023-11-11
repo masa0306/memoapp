@@ -1,8 +1,9 @@
 // 関数の定義
 var key = localStorage.length
-let startTime;
 var record = [];
 var base64String;
+
+
 
 // カメラの利用準備
 // https://developer.mozilla.org/ja/docs/Web/API/MediaDevices/getUserMedia
@@ -47,6 +48,7 @@ $("#snap").on("click",function(){
     context.drawImage(video, 0, 0, 600, 450); // video要素の画像をcanvasに描画
     $("#snap").fadeOut();
     $("#video").fadeOut();
+    $("#cancelModal").fadeOut();
     $("#resnap").fadeIn();
     $("#startCanvas").fadeIn();
     $("#startSubmit").fadeIn(); 
@@ -69,7 +71,6 @@ $("#startSubmit").on("click", function () {
     startTime= moment();
     console.log(startTime); 
     record = [];
-    countup(startTime);
     $("#start").fadeOut();
     $("#startModal").fadeOut();
     $("#inProgress").fadeIn();
@@ -84,32 +85,78 @@ function timeFix(time){
     return result;
 };
 
+
+// stopRestarttime用
+var timerInterval = null;  //setInterval(updateTimer, 1000); をいれてIntervalIDを格納。clearできるようにする必要がある。
+var startTime=null;
+var lastPauseTime = 0;
+var isTimerRunning = false;
+var pauseDuration = 0;
+var elapsedTime = 0;
+
+// タイマー実装のめも
+// スタート、ストップ、再開、時間の表示をそれぞれ分けて実装
+// スタートからの時間 - （ストップから再開までの時間）をupdate timeにわたす
 // 時間のカウントのタイマー
-var stoptrigger=0;
-var timer1 = null;
+function timer(){
+    function startTimer(){
+        startTime = moment();
+        pauseDuration = 0;
+        updateTimer();
+        timerInterval = setInterval(updateTimer,1000);
+        isTimerRunning = true;
+        // https://www.sejuku.net/blog/24425
+    };
 
-function countup(time){    
+    function stopTimer(){
+        clearInterval(timerInterval);
+        lastPauseTime = moment();
+        $("#stop").text("RESTART").attr("id","restart"); 
+        attachRestartHandler();
+        isTimerRunning = false;
+    };
+
+    function restartTimer(){
+        pauseDuration = moment().diff(lastPauseTime);
+        timerInterval = setInterval(updateTimer,1000);
+        $("#restart").text("stop").attr("id", "stop");
+        attachStopHandler();
+        isTimerRunning = true;
+    }
+        
     function updateTimer(){
-        if (stoptrigger===1){
-            clearInterval(timer1);
+        if (!isTimerRunning){
+            return;
         }
-
-        var timeDiff= moment().diff(time);
-        var duration = moment.duration(timeDiff);
+        var currentTime = moment();
+        var elapsedTime = currentTime.diff(startTime) - pauseDuration;
+        var duration = moment.duration(elapsedTime);
         var durationH = duration.hours();
         var durationM = duration.minutes();
         var durationS = duration.seconds();
         var timeFormatted = `${String(durationH).padStart(2, '0')}:${String(durationM).padStart(2, '0')}:${String(durationS).padStart(2, '0')}`;    
-
         $("#timer").html(timeFormatted);
         console.log(timeFormatted);
     };
 
-    timer1 = setInterval(updateTimer,1000);
-    // https://www.sejuku.net/blog/24425
+    // イベントハンドラの処理
+    function attachStopHandler() {
+        $("#stop").off("click").on("click", function() {
+            stopTimer();
+        });
+    }
+    function attachRestartHandler() {
+        $(document).off("click", "#restart").on("click", "#restart", function() {
+            restartTimer();
+            attachStopHandler(); // ここで停止ボタンのハンドラを再度アタッチ
+        });
+    }
+
+    $("#startSubmit").on("click", startTimer);
+    attachStopHandler(); // 初期の停止ボタンのハンドラ設定
+    // $("#stop").on("click", stopTimer);
+    // $("#restart").on("click",restartTimer);
 };
-
-
 
 // フィニッシュボタンによるモーダルの表示
 function finishModal (){
@@ -140,12 +187,12 @@ $("#finishSubmit").on("click", function () {
 
     // 作業時間を計算
     // https://www.sejuku.net/blog/61608
-    var workTime= finishTime.diff(startTime, 'minutes', true) // 91
-    console.log(workTime);
-    const wortTimeH = Math.floor(workTime/60);
-    const wortTimeM = Math.ceil(workTime%60);
-    workTime = (wortTimeH)+"時間"+(wortTimeM)+"分"
-    console.log(workTime);
+    // var workTime= finishTime.diff(startTime, 'minutes', true) // 91
+    console.log(elapsedTime);
+    const elapsedTimeH = Math.floor(elapsedTime/60);
+    const elapsedTimeM = Math.ceil(elapsedTime%60);
+    elapsedTime = (elapsedTimeH)+"時間"+(elapsedTimeM)+"分"
+    console.log(elapsedTime);
 
     // startTime / finishTimeを保存したい形にしてJSONに変換
     var startTimeFixed = timeFix(startTime); // startTimeを修正したい形に変換
@@ -154,7 +201,7 @@ $("#finishSubmit").on("click", function () {
     var finishTimeFixed = timeFix(finishTime); // finishTimeを修正したい形に変換
     console.log(finishTimeFixed); // 修正された日時をログに出力
     // 一つのレコードとして今日のコミットメントを格納
-    record.push(startTimeFixed,base64String,finishTimeFixed,workTime,finishOneword,finishAchivement);
+    record.push(startTimeFixed,base64String,finishTimeFixed,elapsedTime,finishOneword,finishAchivement);
     
     // そのレコードをローカルストレージにお保存
     var serializedRecord = JSON.stringify(record);
@@ -192,7 +239,7 @@ function getList(){
             if (value && value.length >= 100){
                 html = `
                 <td align="center" class="recordContent">
-                <img src="${value}" class="image-class" />
+                <img src="${value}" class="image-class" width="400" height="300" />
                 </td>`;
             } else {
                 html = `
@@ -223,6 +270,7 @@ $("#clear").on("click", function () {
 });
 
 $(document).ready(function() {
+    timer();
     startModal ();
     getList();
     finishModal();

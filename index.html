@@ -15,15 +15,17 @@
 
 </head>
 <body>
-<div class="top">
-    <h1>僕のプログラミング学習記録</h1>
-</div>
-<div class="timer">
-    <p id="timer">00:00:00</p>
+<header class="header">
+    <h1 class="header-text">僕のプログラミング学習記録</h1>
+</header>
+
+<main class="main-content">
+<div class="timer-container">
+    <p id="timer" class="timer">00:00:00</p>
 </div>
 
-<div class="startButtonOuter">
-    <button id="start" class="startButton">START</button>
+<div class="button-container">
+    <button id="start" class="button startButton">START</button>
 </div>
 
 <!-- 開始時のモーダルビュー -->
@@ -43,14 +45,17 @@
             <canvas class="snapFrame" id="startCanvas" width="600" height="450" ></canvas>
         </div>
     </div>
-    <button id="startSubmit" class="startSubmit pushButton">START</button>
+    <button id="startSubmit" class="startSubmit submitButton">START</button>
 </div>
 
 <!-- 作業中のビュー -->
 <div id = "inProgress" class="inProgress">
-    <div class="startButtonOuter">
-        <button id="finish"class="finishButton pushButton">FINISH</button>
+    <div class="button-container">
+        <button id="finish"class="finishButton button">FINISH</button>
     </div>
+    <!-- <div>
+        <button id="stop">STOP</button>
+    </div> -->
 </div>
 
 <!-- 終了時のモーダルビュー -->
@@ -58,16 +63,17 @@
     <div id="cancelModalFinish"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
     <div class="finishOuter">
         <div class = "finishTexts">
-            <select required class="finishText" id="finishOneword" name="finishOneword" aria-placeholder="達成度">
+            <select required class="finishText1" id="finishOneword" name="finishOneword" aria-placeholder="達成度">
                 <option value="" selected hidden>選択してください</option>
-                <option value="1">限界突破！</option>
-                <option value="2">よく頑張った！</option>
-                <option value="3">ぼちぼちかな</option>
-                <option value="4">妥協した</option>
+                <option value="限界突破！">限界突破！</option>
+                <option value="よく頑張った！">よく頑張った！</option>
+                <option value="ぼちぼちかな">ぼちぼちかな</option>
+                <option value="妥協した">妥協した</option>
             </select>      
-            <input class="finishText"id="finishAchivement" type="text" placeholder="振り返りの一言！"size="30">
+            <!-- <input class="finishText"id="finishAchivement" type="text" placeholder="振り返り！"size="70"> -->
+            <textarea class="finishText2"id="finishAchivement" type="text" rows="5" cols="30" placeholder="振り返り！"></textarea>
         </div>
-        <button id="finishSubmit" class="finishSubmit">FINISH</button>
+        <button id="finishSubmit" class="finishSubmit submitButton">FINISH</button>
     </div>
 </div>
 
@@ -91,26 +97,24 @@
         </tbody>
     </table>
 </div>
+</main>
 
-<div class="clear">
-    <button id="clear">全て削除</button>
-</div>
+<footer class="footer">
+    <p>© 2023 学習記録</p>
+    <div class="clear">
+        <button id="clear">全て削除</button>
+    </div>    
 
-    <!-- <ul class="record recordtitle_">
-    <li>開始日時</li>
-    <li>終了日時</li>
-    <li>経過時間</li>
-    <li>今日の達成度</li>
-    <li>次回に向けて</li>
-</ul> -->
-<!-- <div id = "records"></div>
-</div> -->
+</footer>
+
 <script src="//cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.js"></script>
 <script src="/js/script.js"></script>
-
 </body>
 </html>
+
+
+
 
 
 
