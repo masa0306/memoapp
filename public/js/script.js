@@ -2,15 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebas
 import { getDatabase, ref, push, set, onChildAdded, remove } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js';
 import { getStorage, ref as storageReference, uploadBytes,getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-storage.js';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDe8untMNnS8d6vDRgCVPDeRHTVU-KvX50",
-  authDomain: "my-coding-diary-3b095.firebaseapp.com",
-  projectId: "my-coding-diary-3b095",
-  storageBucket: "my-coding-diary-3b095.appspot.com",
-  messagingSenderId: "698029638639",
-  appId: "1:698029638639:web:cc4a5201aa2693506dac1a"
-};
-
+const firebaseConfig = firebaseKey;
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app); //RealtimeDBに接続
@@ -312,7 +304,7 @@ function getList(){
         const elapsedTimeH = Math.floor(elapsedTimeAll/60);
         const elapsedTimeM = Math.ceil(elapsedTimeAll%60);
         const elapsedTimeText = (elapsedTimeH)+"時間"+(elapsedTimeM)+"分"
-        console.log(elapsedTimeText);
+
     
 
         let html =`
