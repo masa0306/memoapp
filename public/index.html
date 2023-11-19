@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>僕のプログラミング学習記録</title>
+    <link rel="stylesheet" href="src/reset.css">
+    <link rel="stylesheet" href="src/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- ソート用のライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+
+</head>
+<body>
+<header class="header">
+    <h1 class="header-text">僕のプログラミング学習記録</h1>
+</header>
+
+<main class="main-content">
+<div class="timer-container">
+    <p id="timer" class="timer">00:00:00</p>
+</div>
+<div class="video">
+    <video class="snapFrame"id="video" width="600" height="450" autoplay> </video>
+</div>
+<!-- 開始時のモーダルビュー -->
+<!-- <div class="startModal modal" id="startModal">
+    <div class="centerPoint">
+        <div id="cancelModal"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
+        <div class = "startOuter">
+            <div class="snapBeforeFrame">
+                <video class="snapFrame"id="video" width="600" height="450" autoplay> </video>
+                <button id="startSubmit" class="startSubmit">START</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- 作業中のビュー -->
+<div id = "inProgress" class="inProgress">
+    <div class="button-container">
+        <button id="start"class="button startButton" >START</button>
+    </div>
+    <div class="button-container">
+        <button id="finish"class="finishButton button">FINISH</button>
+    </div>
+    <div>
+        <button id="pause" class="pause"><i class="fa fa-pause"></i> Pause</button>
+    </div>
+    <div>
+        <button id="restart" class="restart" disabled><i class="fa fa-redo"></i> Restart</button>
+    </div>
+</div>
+
+<!-- 終了時のモーダルビュー -->
+<div class = "finishModal modal" id="finishModal">
+    <div id="cancelModalFinish"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
+    <div class="finishOuter">
+        <div class = "finishTexts">
+            <select required class="finishText1" id="finishAchivement" name="finishOneword" aria-placeholder="達成度">
+                <option value="" selected hidden>選択してください</option>
+                <option value="限界突破！">限界突破！</option>
+                <option value="よく頑張った！">よく頑張った！</option>
+                <option value="ぼちぼちかな">ぼちぼちかな</option>
+                <option value="妥協した">ぶっちゃけ妥協した</option>
+            </select>      
+            <!-- <input class="finishText"id="finishAchivement" type="text" placeholder="振り返り！"size="70"> -->
+            <textarea class="finishText2"id="finishOneword" type="text" rows="4" cols="30" placeholder="振り返り！"></textarea>
+        </div>
+        <button id="finishSubmit" class="finishSubmit">FINISH</button>
+    </div>
+</div>
+
+<div class="display">
+    <table border="1" width="100%"  height="150px" id="records" class="tablesorter">
+        <thead>
+            <th width = 15% >開始日時</th>
+            <th width = 20% >はじめのお顔</th>
+            <th width = 15%>終了日時</th>
+            <th width = 15%>経過時間</th>
+            <th width = 15%>達成度</th>
+            <th width = 21%>振り返り</th>
+        </thead>
+        <tbody>
+            <!-- <tr id="record${key}" class="record">
+                <td align="center" class="recordContent">${msg.startTimeFixed}</td>
+                <td align="center" class="recordContent"><img src="${msg.base64String}" class="image-class" width="400" height="300"/></td>
+                <td align="center" class="recordContent">${msg.finishTimeFixed}</td>
+                <td align="center" class="recordContent">${elapsedTimeText}</td>
+                <td align="center" class="recordContent">${msg.finishAchivement}</td>
+                <td align="center" class="recordContent">${msg.finishOneword}</td>
+            </tr> -->
+        </tbody>
+    </table>
+</div>
+</main>
+
+<footer class="footer">
+    <p>© 2023 学習記録</p>
+    <div class="clear">
+        <button id="clear">全て削除</button>
+    </div>    
+
+</footer>
+
+<script src="//cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.js"></script>
+<script type="module" src="./js/script.js"></script>
+</body>
+</html>

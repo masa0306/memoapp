@@ -1,0 +1,377 @@
+/* 共通 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+/* タイトル */
+/* ヘッダー */
+header {
+    background-color: #4fc3f7; /* 明るい青色 */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-text {
+    font-size: 48px;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* タイマー */
+.timer-container {
+    background-color: #e1f5fe; /* 薄い青色 */
+    padding: 20px 0;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.timer {
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+/* スタート */
+.video{
+    text-align: center;
+}
+.snapFrame{
+    text-align: center;
+}
+
+.start-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* スタートボタン */
+.button-container{
+    display: flex;
+    justify-content: center;
+
+}
+.startButton, .finishButton{
+    width:300px;
+    height:300px;
+    border-radius: 50%;
+    font-size: 50px;
+    margin-right: 20px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+}
+
+
+.startButton:hover {
+    background-color: bisque;
+    color: red;
+}
+
+.startButton:active {
+    background-color: bisque;
+    color: red;
+    border: none;
+    transform: translate(10px,10px);
+    filter: none;
+  }
+
+.startButton:hover, .finishButton:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.05); /* ホバー時に少し大きく */
+}
+
+.startButton:active, .finishButton:active {
+    transform: scale(0.95); /* アクティブ時（クリック時）に少し小さく */
+}
+
+/* finishbutton */
+.finishButton{
+    display: none;
+    background-color:blue;
+}
+
+.finishButton:hover {
+    background-color: bisque;
+    color: blue;
+}
+
+.finishButton:active {
+    background-color: bisque;
+    color: blue;
+    border: none;
+    transform: translate(10px,10px);
+    filter: none;
+  }
+
+/* スタートモーダル */
+.modal{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.8);
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    z-index: 100%;
+}
+
+/* キャンセルボタン */
+.cancelModal{
+    position: absolute;
+    top:-250px;
+    left: 300px;
+    transform: translate(-50%,0);
+    right: 10%;
+    width: 30px;
+    z-index: 2;
+    height: 30px;
+    filter: drop-shadow(2px 2px 0px rgba(214, 0, 0, 0.8));
+}
+.cancelModal:active{
+    filter:none;
+    transform: translate(2px,2px);
+}
+
+
+
+/* 撮影用画面 */
+.startOuter{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.centerPoint, .startOute{
+    width: 0;
+	height: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+
+.snapButton{
+    position: absolute;
+    top: 230px;
+    transform: translate(-50%,0);
+    width: 100px;
+    height: 100px;
+    z-index: 2;   
+}
+
+.resnapButton{
+    position: absolute;
+    top: -240px;
+    left: -300px;
+    transform: translate(-50%,0);
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+}
+
+
+/* サブミットボタン共通 */
+
+.startSubmit{
+    position: absolute;
+    top: 280px;
+    transform: translate(-50%,0);
+}
+.finishSubmit{
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.startSubmit, .finishSubmit {
+    background-color: #ff9800; /* 目立つオレンジ色 */
+    color: white;
+    font-size: 20px; /* 大きなフォントサイズ */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* より強い影 */
+    padding: 15px 30px; /* より大きなパディング */
+    border: none;
+    border-radius: 5px; /* 角を少し丸く */
+    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
+}
+
+.startSubmit:hover, .finishSubmit:hover {
+    transform: translate(-50%,0) scale(1.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    
+}
+.startSubmit:active, .finishSubmit:active {
+    transform: translate(-50%,0) scale(0.9);
+    color: red;
+    
+}
+
+/* pauseとrestartボタン */
+.pause, .restart {
+    display: none;
+    background-color: #4CAF50; /* 緑色 */
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 150px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+
+.pause:hover, .restart:hover {
+    background-color: #66BB6A; /* ホバー時の明るい緑色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    transform: translate(-50%,-50%) scale(1.5);
+}
+
+.pause:active, .restart:active {
+    background-color: #388E3C; /* アクティブ時の濃い緑色 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+    transform: translate(-50%,-50%);
+}
+
+.pause:disabled:hover, .restart:disabled:hover{
+    transform: none; /* ホバー効果を無効化 */
+    transform: translate(-50%,-50%);
+}
+
+.pause:disabled, .restart:disabled{
+    background-color: #cccccc; /* 灰色の背景 */
+    color: #666666; /* 暗めの文字色 */
+    cursor: not-allowed; /* 禁止マークのカーソル */
+    box-shadow: none; /* 影を消す */
+    transform: translate(-50%,-50%);
+}
+
+
+
+/* 作業中 */
+.inProgress{
+    position: relative;
+    width: auto;
+    margin: auto;
+}
+
+.pause{
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%,-50%);
+}
+
+.restart {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%,-50%);
+}
+/* 終了モーダル */
+.finishModal{
+    display: none;
+}
+.finishOuter{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.finishTexts{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    gap:20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+.finishText1{
+    padding: 1em 0.5em;
+    line-height: 2;
+    width: 200px;
+}
+.finishText2{
+    padding: 1em 0.5em;
+    line-height: 2;
+}
+
+.button {
+    background-color: #4fc3f7;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+    background-color: #29b6f6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* テーブルスタイル */
+.tablesorter {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tablesorter thead th {
+    background-color: #b3e5fc;
+    color: #333;
+    padding: 10px;
+}
+
+.tablesorter tbody{
+    text-align: center;
+}
+
+.tablesorter tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 15px;
+    color: #333;
+    vertical-align:middle;
+}
+
+.tablesorter tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+
+
+
