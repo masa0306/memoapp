@@ -10,6 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/51cdcc17df.js" crossorigin="anonymous"></script>
     <!-- ソート用のライブラリ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js"></script>
@@ -20,13 +21,22 @@
 <header class="header">
     <h1 class="header-text">僕のプログラミング学習記録</h1>
 </header>
-
+<div class="totalTime">
+    <p>現在の合計お勉強時間は....</p>
+    <div class =result id="result"></div>
+</div>
 <main class="main-content">
 <div class="timer-container">
     <p id="timer" class="timer">00:00:00</p>
 </div>
-<div class="video">
-    <video class="snapFrame"id="video" width="600" height="450" autoplay> </video>
+<div class="photo">
+    <div class="video">
+        <video class="snapFrame"id="video" width="600" height="450" autoplay></video>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas" width="600" height="450"></canvas>
+    </div>
+    <audio id="shutterSound"src="/public/audio/Camera-Phone01-5.mp3"></audio>
 </div>
 <!-- 開始時のモーダルビュー -->
 <!-- <div class="startModal modal" id="startModal">
@@ -42,6 +52,7 @@
 </div> -->
 
 <!-- 作業中のビュー -->
+
 <div id = "inProgress" class="inProgress">
     <div class="button-container">
         <button id="start"class="button startButton" >START</button>
@@ -53,7 +64,7 @@
         <button id="pause" class="pause"><i class="fa fa-pause"></i> Pause</button>
     </div>
     <div>
-        <button id="restart" class="restart" disabled><i class="fa fa-redo"></i> Restart</button>
+        <button id="restart" class="restart" disabled><i class="fa fa-redo"></i> Resume</button>
     </div>
 </div>
 

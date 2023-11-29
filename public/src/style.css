@@ -20,12 +20,23 @@ header {
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .header-text {
     font-size: 48px;
     margin: 0;
     font-family: 'Arial', sans-serif;
+}
+
+/* totalTime */
+.totalTime{
+    background-color: #f4e46a; /* 明るい青色 */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    font-size: 24px;
+    width: 100%;
 }
 
 /* タイマー */
@@ -46,9 +57,21 @@ header {
     margin: 0;
 }
 /* スタート */
-.video{
+.photo{
+    height: 450px;
+    position: relative;
     text-align: center;
 }
+.video .canvas{
+    position: absolute;
+    left: 50%;
+    transform: translate(0%,-50%);
+    transition: opacity 0.5s ease-in-out;
+}
+.canvas{
+    z-index: 1;
+}
+
 .snapFrame{
     text-align: center;
 }
