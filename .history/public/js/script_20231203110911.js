@@ -18,6 +18,9 @@ const storageRef = storageReference(storage); //strageを参照
 //     await ffmpeg.load();
 // }
 
+
+
+
 // 関数の定義
 var key = localStorage.length
 let recorder;
@@ -294,7 +297,7 @@ async function saveToDatabase(){
     const newPostRef = push(dbRef);
     set(newPostRef,msg)
     .then(() => {
-        location.reload();
+        // location.reload();
     })
     .catch((error) => {
         // エラー処理

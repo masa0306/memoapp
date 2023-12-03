@@ -294,7 +294,7 @@ async function saveToDatabase(){
     const newPostRef = push(dbRef);
     set(newPostRef,msg)
     .then(() => {
-        location.reload();
+        // location.reload();
     })
     .catch((error) => {
         // エラー処理
