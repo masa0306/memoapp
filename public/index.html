@@ -1,127 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>僕のプログラミング学習記録</title>
-    <link rel="stylesheet" href="src/reset.css">
-    <link rel="stylesheet" href="src/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/51cdcc17df.js" crossorigin="anonymous"></script>
-    <!-- ソート用のライブラリ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.7.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.7.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.7.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-</head>
-<body>
-<header class="header">
-    <h1 class="header-text">僕のプログラミング学習記録</h1>
-</header>
-<div class="totalTime">
-    <p>現在の合計お勉強時間は....</p>
-    <div class =result id="result"></div>
-</div>
-<main class="main-content">
-<div class="timer-container">
-    <p id="timer" class="timer">00:00:00</p>
-</div>
-<div class="photo">
-    <div class="video">
-        <video class="snapFrame"id="video" width="600" height="450" autoplay></video>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
-    <div class="canvas">
-        <canvas id="canvas" width="600" height="450"></canvas>
-    </div>
-    <audio id="shutterSound"src="/public/audio/Camera-Phone01-5.mp3"></audio>
-</div>
-<!-- 開始時のモーダルビュー -->
-<!-- <div class="startModal modal" id="startModal">
-    <div class="centerPoint">
-        <div id="cancelModal"><img src="/img/x-mark-48.png" alt=""  class="cancelModal"></div>
-        <div class = "startOuter">
-            <div class="snapBeforeFrame">
-                <video class="snapFrame"id="video" width="600" height="450" autoplay> </video>
-                <button id="startSubmit" class="startSubmit">START</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-<!-- 作業中のビュー -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-<div id = "inProgress" class="inProgress">
-    <div class="button-container">
-        <button id="start"class="button startButton" >START</button>
-    </div>
-    <div class="button-container">
-        <button id="finish"class="finishButton button">FINISH</button>
-    </div>
-    <div>
-        <button id="pause" class="pause"><i class="fa fa-pause"></i> Pause</button>
-    </div>
-    <div>
-        <button id="restart" class="restart" disabled><i class="fa fa-redo"></i> Resume</button>
-    </div>
-</div>
-
-<!-- 終了時のモーダルビュー -->
-<div class = "finishModal modal" id="finishModal">
-    <div id="cancelModalFinish"><img src="/public/img/x-mark-48.png" alt=""  class="cancelModal"></div>
-    <div class="finishOuter">
-        <div class = "finishTexts">
-            <select required class="finishText1" id="finishAchivement" name="finishOneword" aria-placeholder="達成度">
-                <option value="" selected hidden>選択してください</option>
-                <option value="限界突破！">限界突破！</option>
-                <option value="よく頑張った！">よく頑張った！</option>
-                <option value="ぼちぼちかな">ぼちぼちかな</option>
-                <option value="妥協した">ぶっちゃけ妥協した</option>
-            </select>      
-            <!-- <input class="finishText"id="finishAchivement" type="text" placeholder="振り返り！"size="70"> -->
-            <textarea class="finishText2"id="finishOneword" type="text" rows="4" cols="30" placeholder="振り返り！"></textarea>
-        </div>
-        <button id="finishSubmit" class="finishSubmit">FINISH</button>
-    </div>
-</div>
-
-<div class="display">
-    <table border="1" width="100%"  height="150px" id="records" class="tablesorter">
-        <thead>
-            <th width = 15% >開始日時</th>
-            <th width = 20% >はじめのお顔</th>
-            <th width = 15%>終了日時</th>
-            <th width = 15%>経過時間</th>
-            <th width = 15%>達成度</th>
-            <th width = 21%>振り返り</th>
-        </thead>
-        <tbody>
-            <!-- <tr id="record${key}" class="record">
-                <td align="center" class="recordContent">${msg.startTimeFixed}</td>
-                <td align="center" class="recordContent"><img src="${msg.base64String}" class="image-class" width="400" height="300"/></td>
-                <td align="center" class="recordContent">${msg.finishTimeFixed}</td>
-                <td align="center" class="recordContent">${elapsedTimeText}</td>
-                <td align="center" class="recordContent">${msg.finishAchivement}</td>
-                <td align="center" class="recordContent">${msg.finishOneword}</td>
-            </tr> -->
-        </tbody>
-    </table>
-</div>
-</main>
-
-<footer class="footer">
-    <p>© 2023 学習記録</p>
-    <div class="clear">
-        <button id="clear">全て削除</button>
-    </div>    
-
-</footer>
-
-<script src="//cdn.jsdelivr.net/npm/vue"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.js"></script>
-<script type="text/javascript" src="/public/js/config.js"></script>
-<script type="module" src="./js/script.js"></script>
-</body>
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
 </html>

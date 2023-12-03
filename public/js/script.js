@@ -162,6 +162,7 @@ function timer(){
         finishTime = moment();
         console.log(finishTime.diff(startTime))
         elapsedTime = finishTime.diff(startTime) - pauseDuration;
+        
         elapsedTimeDuration = moment.duration(elapsedTime)
         console.log(elapsedTimeDuration); //milliseconds
         isTimerRunning = false;
@@ -292,10 +293,11 @@ async function saveToDatabase(){
         finishOneword:finishOneword,
         finishAchivement:finishAchivement,
     }
+    console.log(elapsedTime);
     const newPostRef = push(dbRef);
     set(newPostRef,msg)
     .then(() => {
-        location.reload();
+        // location.reload();
     })
     .catch((error) => {
         // エラー処理
@@ -336,7 +338,6 @@ async function getList(){
         var elapsedTimeTotalText;
         // elapsedTimeを文字列に変換
         const elapsedTimeAll = (msg.elapsedTime/(60 * 1000));//millisecoundsを分単位に治す
-        
         const elapsedTimeH = Math.floor(elapsedTimeAll/60);
         const elapsedTimeM = Math.ceil(elapsedTimeAll%60);
         const elapsedTimeText = (elapsedTimeH)+"時間"+(elapsedTimeM)+"分"
